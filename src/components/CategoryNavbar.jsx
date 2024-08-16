@@ -1,37 +1,36 @@
-import React, { useEffect, useState } from 'react'
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from 'react'
 import { CATEGORIES_LIST } from '../utils/constants';
-import { extractRating } from '../utils/helperFunction';
+import { extractRating } from '../utils/helpers/extractRating';
 // import RestaurantMockList from '../utils/RestaurantMockList.json'
 
 const CategoryNavbar = (props) => {
-    const { renderResList, setRenderResList, RestaurantList } = props.data;
+    const { setRenderResList, RestaurantList } = props.data;
     const [activeCat, setActiveCat] = useState(CATEGORIES_LIST[0]);
 
-    const handleCategory = () => {        
+    const filterRestaurantsByCategory = () => {
         switch (activeCat) {
             case CATEGORIES_LIST[0]: {
-                setRenderResList(RestaurantList);
-                break;
+                return RestaurantList;                
             }
             case CATEGORIES_LIST[1]: {
                 const constRating = extractRating(CATEGORIES_LIST[1]);
                 const filteredList = RestaurantList.filter((r) => r.rating > constRating);
-                setRenderResList(filteredList);
-                break;
+                return filteredList;
             }
             case CATEGORIES_LIST[2]: {
                 const filteredList = RestaurantList.filter((r) => r.deliveryTime < 30);
-                setRenderResList(filteredList);
-                break;
+                return filteredList;
             }
             default: {
                 console.error("Category doesn't Match! \nCurrent Active Category is : ", activeCat);
+                return [-1];
             }
         }
     }
 
     useEffect(() => {
-        handleCategory();
+        setRenderResList(filterRestaurantsByCategory());
     }, [activeCat])
 
     return (

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import RestaurantCard from "../components/RestaurantCard";
 // import RestaurantMockList from '../utils/RestaurantMockList.json'
-import { FRENCH_FRIES, SWIGGY_API_LINK, SWIGGY_BASE_IMG_LINK, ZIG_ZAG_IMG } from "../utils/constants";
+import { FRENCH_FRIES, SWIGGY_API_LINK, ZIG_ZAG_IMG } from "../utils/constants";
 import RestaurantCardShimmer from "../components/RestaurantCardShimmer";
 import CategoryNavbar from "../components/CategoryNavbar";
-import { formatFetchedList } from "../utils/helperFunction";
+import { formatFetchedList } from "../utils/helpers/formatFetchedList";
 
 const OrderOnline = () => {
     const [renderResList, setRenderResList] = useState([]);
@@ -27,9 +27,14 @@ const OrderOnline = () => {
     const handleSearch = (e) => {
         const txt = e.target.value;
         setSearchTxt(txt);
-        
+
         const filterSearch = RestaurantList.filter((r) => (r.restaurantName.toLowerCase()).includes(txt.toLowerCase()));
         setRenderResList(filterSearch)
+    }
+
+    const clearSearch = () => {
+        setSearchTxt("")
+        setRenderResList(RestaurantList)
     }
 
     useEffect(() => {
@@ -45,8 +50,9 @@ const OrderOnline = () => {
                     <h1 className='text-4xl my-6 font-[KaushanFont]'>Our Special Deals</h1>
                     <img className="mx-auto" src={ZIG_ZAG_IMG} alt="" />
                 </div>
-                <div>
-                    <input type="search" value={searchTxt} onChange={(e) => handleSearch(e)} placeholder="Search..." className="px-2 py-1 border-b-2 border-lime-300 outline-none text-lg" />
+                <div className="relative">
+                    <i className="ri-search-line absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    <input type="search" value={searchTxt} onChange={(e) => handleSearch(e)} placeholder="Search..." className="pl-8 pr-2 py-1 border-b-2 border-lime-300 outline-none text-lg w-full" />
                 </div>
             </div>
 
@@ -54,14 +60,25 @@ const OrderOnline = () => {
             <CategoryNavbar data={{ renderResList, setRenderResList, RestaurantList }} />
 
             <div className="restaurant-container flex gap-8 justify-center flex-wrap" >
-                {renderResList.length === 0 ?
-                    <RestaurantCardShimmer /> :
-                    renderResList.map((data, i) => {
-                        return (
-                            <RestaurantCard key={data.id} data={data} />
-                        )
-                    })
-                }
+                {renderResList.length === 0 ? (
+                    searchTxt ? (
+                        <div className="flex flex-col items-center py-8">
+                            <p className="text-red-500 text-3xl mt-4 py-4">No results found for "{searchTxt}".</p>
+                            <button
+                                onClick={() => clearSearch()}
+                                className="ml-2 px-4 font-semibold py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                            >
+                                Clear Search Input
+                            </button>
+                        </div>
+                    ) : (
+                        <RestaurantCardShimmer />
+                    )
+                ) : (
+                    renderResList.map((data) => (
+                        <RestaurantCard key={data.id} data={data} />
+                    ))
+                )}
             </div>
         </>
     );
