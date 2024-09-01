@@ -17,3 +17,8 @@
 .not-found{
     @apply uppercase text-8xl text-red-500 font-extrabold text-center; 
 }
+
+.my-flip{
+    @apply transform;    
+    transform: rotateY(180deg);
+}

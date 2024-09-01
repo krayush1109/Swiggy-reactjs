@@ -6,7 +6,6 @@
 	],
 	"settings": {
 		"hide-files.files": [
-			".eslintrc.cjs",
 			".gitignore",
 			"vite.config.js",
 			"postcss.config.js",

@@ -1,9 +1,12 @@
+/* eslint-disable react/prop-types */
 // SwiggyCard.js
 import React from 'react';
 import { PREMIUM_RATING } from '../utils/constants';
+import { Link } from 'react-router-dom';
 
 const RestaurantCard = ({ data }) => {
     const {
+        id,
         image,
         restaurantName,
         rating,
@@ -14,7 +17,7 @@ const RestaurantCard = ({ data }) => {
     } = data;
 
     return (
-        <div className="relative max-w-sm rounded overflow-hidden shadow-xl bg-white w-72 h-[29rem] hover:-translate-y-1 duration-500 cursor-pointer">
+        <Link to={`/res-menu/${id}`} className="relative max-w-sm rounded overflow-hidden shadow-xl bg-white w-72 h-[29rem] hover:-translate-y-1 duration-500 cursor-pointer">
             {(rating > PREMIUM_RATING) &&
                 <div className="absolute top-0 right-5 px-2 py-1 cutive-mono-regular font-extrabold text-white bg-amber-500 text-sm font-bold rounded-b-lg shadow-xl ">
                     PREMIUM
@@ -47,7 +50,7 @@ const RestaurantCard = ({ data }) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 
