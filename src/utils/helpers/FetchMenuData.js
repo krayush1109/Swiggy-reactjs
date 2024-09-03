@@ -5,12 +5,11 @@ export const FetchMenuData = async (restaurantID) => {
         const response = await fetch(`${SWIGGY_RESTAURANT_MENU_API}${restaurantID}`);
         console.log(`${SWIGGY_RESTAURANT_MENU_API}${restaurantID}`);
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         // console.log(json.data.cards[2].card.card.info);
 
-
         const rawRestaurantInfo = await data.data.cards[2].card.card.info;
-        console.log(rawRestaurantInfo);
+        // console.log(rawRestaurantInfo);
 
         const extractRestaurantInfo = (info) => {
             const restaurantInfo = {

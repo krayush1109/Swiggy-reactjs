@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react'
 import { CATEGORIES_LIST } from '../utils/constants';
-import { extractRating } from '../utils/helpers/extractRating';
+import { useExtractRating } from '../utils/helpers/useExtractRating';
 // import RestaurantMockList from '../utils/RestaurantMockList.json'
 
 const CategoryNavbar = (props) => {
@@ -14,7 +14,7 @@ const CategoryNavbar = (props) => {
                 return RestaurantList;                
             }
             case CATEGORIES_LIST[1]: {
-                const constRating = extractRating(CATEGORIES_LIST[1]);
+                const constRating = useExtractRating(CATEGORIES_LIST[1]);
                 const filteredList = RestaurantList.filter((r) => r.rating > constRating);
                 return filteredList;
             }

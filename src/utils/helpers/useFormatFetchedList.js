@@ -1,6 +1,6 @@
 import { SWIGGY_BASE_IMG_LINK } from "../constants";
 
-export const formatFetchedList = (list) => {
+export const useFormatFetchedList = (list) => {
     return list.map((item) => ({
         id: item.info.id,
         image: SWIGGY_BASE_IMG_LINK + item.info.cloudinaryImageId,

@@ -12,7 +12,7 @@ const RestaurantMenu = () => {
     (async () => {
       const list = await FetchMenuData(restaurantID)
       setResInfo(list);
-      console.log(list);
+      // console.log(list);
     })()
   }, [])
 

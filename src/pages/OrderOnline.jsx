@@ -4,7 +4,7 @@ import RestaurantCard from "../components/RestaurantCard";
 import { FRENCH_FRIES, SWIGGY_API_LINK, ZIG_ZAG_IMG } from "../utils/constants";
 import RestaurantCardShimmer from "../components/RestaurantCardShimmer";
 import CategoryNavbar from "../components/CategoryNavbar";
-import { formatFetchedList } from "../utils/helpers/formatFetchedList";
+import { useFormatFetchedList } from "../utils/helpers/useFormatFetchedList";
 
 const OrderOnline = () => {
     const [renderResList, setRenderResList] = useState([]);
@@ -16,7 +16,7 @@ const OrderOnline = () => {
             const response = await fetch(SWIGGY_API_LINK);
             const json = await response.json();
             const listfetched = await json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants;
-            const formattedList = await formatFetchedList(listfetched)
+            const formattedList = await useFormatFetchedList(listfetched)
             setRestaurantList(formattedList)
             setRenderResList(formattedList)
         } catch (error) {
