@@ -64,7 +64,7 @@ const Header = () => {
                                 Latest News
                             </NavLink>
                             <NavLink
-                                to='/unknown/5'
+                                to='/contact'
                                 className={(navData) =>
                                     `${navData.isActive ? 'active-link' : ''} navbar-link`
                                     // `${navData.isActive ? console.log(navData) : console.log(navData)} navbar-link`

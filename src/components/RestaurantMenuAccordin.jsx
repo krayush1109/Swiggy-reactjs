@@ -30,7 +30,7 @@ const AccordionItem = ({ title, contents }) => {
                             <div id='lhs-accordion' className='pr-12 space-y-2'>
                                 <div>
                                     <h1 className='font-bold text-lg text-slate-800'>{content.name}</h1>
-                                    <p className='font-bold  '>₹ { content.price }</p>
+                                    <p className='font-bold  '>₹ { content.price/100 }</p>
                                 </div>
 
                                 <h3 className='text-emerald-500 text-sm font-bold'> <i className='ri-star-fill'></i>{content.rating || '0'}<span className='text-slate-400'> ({content.ratingCount || '0'})</span> </h3>

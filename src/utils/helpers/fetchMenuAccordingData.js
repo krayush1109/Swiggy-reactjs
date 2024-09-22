@@ -46,7 +46,7 @@ export const fetchMenuAccordingData = async (restaurantID) => {
                         id: itemCard?.card?.info?.id,
                         name: itemCard?.card?.info?.name,
                         category: itemCard?.card?.info?.category,                        
-                        price: itemCard?.card?.info?.price/100,
+                        price: itemCard?.card?.info?.price,
                         imageId: itemCard?.card?.info?.imageId,
                         isVeg: itemCard?.card?.info?.isVeg,
                         rating: itemCard?.card?.info?.ratings?.aggregatedRating?.rating,
