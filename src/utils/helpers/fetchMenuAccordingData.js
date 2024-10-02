@@ -18,6 +18,10 @@ export const fetchMenuAccordingData = async (restaurantID) => {
             if (indexOfRecommended >= 0) {
                 const title = prefix[indexOfRecommended]?.card?.card?.title;
                 const items = prefix[indexOfRecommended]?.card?.card?.itemCards?.map((itemCard) => {
+                    const price = itemCard?.card?.info?.price;
+                    if (!price || isNaN(price)) {
+                        return null;
+                    }
                     return (
                         {
                             // general_api: prefix[1]?.card?.card?.itemCards
@@ -31,7 +35,7 @@ export const fetchMenuAccordingData = async (restaurantID) => {
                             ratingCount: itemCard?.card?.info?.ratings?.aggregatedRating?.ratingCountV2,
                         }
                     )
-                })
+                }).filter(Boolean);
                 return { title, items }
             } else {
                 console.log("Alternate Menu Displayed ! No recommended items found");

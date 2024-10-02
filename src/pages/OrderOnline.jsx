@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import RestaurantCard, { withPromotedLabel } from "../components/RestaurantCard";
+import RestaurantCard from "../components/RestaurantCard";
 // import RestaurantMockList from '../utils/RestaurantMockList.json'
 import { FRENCH_FRIES, SWIGGY_API_LINK, ZIG_ZAG_IMG } from "../utils/constants";
 import RestaurantCardShimmer from "../components/RestaurantCardShimmer";
 import CategoryNavbar from "../components/CategoryNavbar";
 import { useFormatFetchedList } from "../utils/helpers/useFormatFetchedList";
-
-const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
 
 const OrderOnline = () => {
     const [renderResList, setRenderResList] = useState([]);
@@ -80,7 +78,7 @@ const OrderOnline = () => {
                     )
                 ) : (
                     renderResList.map((data) => (
-                        (false) ? <RestaurantCard key={data.id} data={data} /> : <RestaurantCardPromoted key={data.id} data={data}  />
+                        <RestaurantCard key={data.id} data={data} />
                     ))
                 )}
             </div>
