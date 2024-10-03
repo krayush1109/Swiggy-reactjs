@@ -2,20 +2,15 @@ import { useEffect, useState } from 'react';
 import { fetchMenuAccordingData } from '../utils/helpers/fetchMenuAccordingData';
 import { SWIGGY_BASE_IMG_LINK } from '../utils/constants';
 
-const AccordionItem = ({ title, contents }) => {
-    const [isOpen, setIsOpen] = useState(true);
+const AccordionItem = ({ title, contents, isOpen, onToggle}) => {
 
-    const toggleAccordion = () => {
-        setIsOpen(!isOpen);
-    };
-
-    console.log(title, contents)
+    // console.log(title, contents)
 
     return (
         <div className="border-b">
             <button
                 className="w-full flex justify-between items-center p-4 focus:outline-none"
-                onClick={toggleAccordion}
+                onClick={onToggle}
             >
                 <span className="text-lg font-medium ">{title} ({contents.length}) </span>
                 <i
@@ -58,35 +53,37 @@ const RestaurantMenuAccordin = ({ restaurantID }) => {
     const [titleFetched, settitleFetched] = useState('');
     const [contentFetched, setContentFetched] = useState([]);
 
+    const [accordionList, setAccordionList] = useState([]);
+    const [openIndex, setOpenIndex] = useState(0);
+    
+    const toggleAccordion = (index) => {
+        setOpenIndex(index == openIndex ? null : index);
+    }
+
     useEffect(() => {
         (async() => {
             // const r = await fetchMenuAccordingData(101059)
             const r = await fetchMenuAccordingData(restaurantID)
             settitleFetched(r.title);
             setContentFetched(r.items);
-            console.log('r : ', r);            
+            setAccordionList(r)
+            // console.log('r : ', r);            
         })()
     }, [])
 
-    const accordionData = [
-        {
-            title: `${titleFetched}`,
-            contents: contentFetched,
-        },
-        // {
-        //     title: 'Accordion Item #2',
-        //     contents: 'This is the content of the second accordion item.',
-        // },
-        // {
-        //     title: 'Accordion Item #3',
-        //     contents: 'This is the content of the third accordion item.',
-        // },
-    ];
+    // accordionList ? console.log("Accordion List : ", accordionList) : null;    
+
+    const accordionData = accordionList.map((d, i) => {
+        return {
+            title: d.title,
+            contents: d.items,
+        }
+    })
 
     return (
         <div className="w-full  mx-auto bg-white rounded-xl shadow-md overflow-hidden">
-            {accordionData.map((item, index) => (
-                <AccordionItem key={index} title={item.title} contents={item?.contents} indexToOpen={0} />
+            {accordionData.map((item, index) => (                
+                <AccordionItem key={index} title={item.title} contents={item?.contents} isOpen={openIndex === index} onToggle={()=> toggleAccordion(index)} />
             ))}
         </div>
     );
