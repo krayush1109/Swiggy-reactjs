@@ -13,7 +13,7 @@ export const fetchMenuAccordingData = async (restaurantID) => {
 
         const formattedRestaurantAccordInfo = (prefix) => {
             // let testCount = 0;
-            let final = prefix.map((pre, i) => {
+            let final = prefix.map((pre) => {
                 if (!pre?.card?.card?.title || !pre?.card?.card?.itemCards) {
                     // console.log("This index not Available : ", i);
                     return;

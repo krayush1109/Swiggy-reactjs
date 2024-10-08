@@ -1,10 +1,15 @@
 import { useEffect, useState } from 'react';
 import { fetchMenuAccordingData } from '../utils/helpers/fetchMenuAccordingData';
 import { SWIGGY_BASE_IMG_LINK } from '../utils/constants';
+import { addItem } from '../store/reducers/cartSlice';
+import { useDispatch } from 'react-redux';
 
 const AccordionItem = ({ title, contents, isOpen, onToggle}) => {
-
+    const dispatch = useDispatch();
     // console.log(title, contents)
+    const handleAddToCart = (content) => {
+        dispatch(addItem(content));
+    }
 
     return (
         <div className="border-b">
@@ -36,7 +41,7 @@ const AccordionItem = ({ title, contents, isOpen, onToggle}) => {
                                 <div className='rounded-xl'>
                                     <img src={`${SWIGGY_BASE_IMG_LINK}/${content.imageId}`} className='w-full h-full bg-cover bg-center rounded-xl shadow-md' alt="NA" />
                                 </div>
-                                <button className='absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 bg-white hover:bg-slate-100 w-4/5 shadow-lg font-extrabold py-2 text-emerald-500 rounded-xl ' > ADD </button>
+                                <button onClick={() => handleAddToCart(content)} className='absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 bg-white hover:bg-slate-100 w-4/5 shadow-lg font-extrabold py-2 text-emerald-500 rounded-xl ' > ADD </button>
                             </div>
                         </section>
                         <hr />

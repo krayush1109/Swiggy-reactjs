@@ -1,8 +1,12 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 
 import { Link, NavLink } from 'react-router-dom';
 
 const Header = () => {
+
+    const cartItems = useSelector((state) => state.cart.items);
+    // console.log(cartItems);
     return (
         <div className="navbar-container">
             <div className='nav-top'>
@@ -90,7 +94,7 @@ const Header = () => {
                             <div className='other-links flex justify-center items-center  gap-4 w-40'>
                                 <img className='other-link-img' src="/img/nav/search.svg" alt="" />
                                 <img className='other-link-img' src="/img/nav/avatar.svg" alt="" />
-                                <img className='other-link-img' src="/img/nav/cart.svg" alt="" />
+                                <Link to={'/cart'} className='flex font-bold'><img className='other-link-img' src="/img/nav/cart.svg" alt="" /> ({cartItems.length}) </Link>
                             </div>
 
                             <button type="button" className=' flex gap-3 px-5 py-3 bg-red-600 hover:bg-lime-500 text-white ease duration-300 uppercase font-serif '>

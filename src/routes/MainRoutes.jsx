@@ -5,6 +5,7 @@ import HeroSlider from '../components/HeroSlider'
 import OrderOnline from '../pages/OrderOnline'
 import NotFound from '../pages/NotFound'
 import RestaurantMenu from '../pages/RestaurantMenu'
+import Cart from '../pages/Cart'
 
 // 😴💤 lazy loading applied on Contact Page
 // import Contact from '../pages/Contact'
@@ -17,6 +18,7 @@ const MainRoutes = () => {
         <Routes>
             <Route path='/' element={<Home />} ></Route>
             <Route path='/order-online' element={<OrderOnline />} ></Route>
+            <Route path='/cart' element={<Cart />} ></Route>
             <Route path='/unknown/:id' element={<HeroSlider />} ></Route>
             <Route path='/res-menu/:id' element={<RestaurantMenu />} ></Route>
             <Route path='/contact' element={<Suspense fallback={<h1>Loading...</h1>} > <Contact /> </Suspense> } ></Route>
